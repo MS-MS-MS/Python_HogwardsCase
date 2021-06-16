@@ -5,6 +5,8 @@
 @FileName: Base.py
 @SoftWare: PyCharm
 """
+import os
+
 from selenium import webdriver
 
 """
@@ -12,7 +14,14 @@ from selenium import webdriver
 """
 class Base():
     def setup(self):
-        self.driver=webdriver.Chrome()
+        # 多浏览器的处理 按照参数来控制使用浏览器
+        browser=os.getenv("browser")
+        if browser=="firefox":
+            self.driver=webdriver.Firefox()
+        elif browser =="headless":
+            self.driver =webdriver.PhantomJS()
+        else:
+            self.driver=webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.implicitly_wait(5)
 
