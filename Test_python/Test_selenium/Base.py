@@ -15,6 +15,10 @@ from selenium import webdriver
 class Base():
     def setup(self):
         # 多浏览器的处理 按照参数来控制使用浏览器
+        # windows的话用set命令设置，并且分行执行
+        # 例如：
+        # set browser=chrome
+        # pytest xxx.py
         browser=os.getenv("browser")
         if browser=="firefox":
             self.driver=webdriver.Firefox()
