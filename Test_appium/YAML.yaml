@@ -1,0 +1,7 @@
+date:
+  code:
+    - [ alibaba, BABA, 217 ]
+    - [ xiaomi, 01810, 26 ]
+  ids:
+    -[ alibaba ]
+    -[ xiaomi ]
