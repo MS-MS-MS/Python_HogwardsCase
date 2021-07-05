@@ -8,7 +8,10 @@
 from time import sleep
 
 from appium import webdriver
+from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.common.touch_action import TouchAction
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class Test_app:
@@ -64,7 +67,17 @@ class Test_app:
         print("搜索")
         self.driver.find_element_by_id("com.xueqiu.android:id/home_search").click()
         self.driver.find_element_by_id("com.xueqiu.android:id/search_input_text").send_keys('阿里巴巴')
-        self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/name'and @text='阿里巴巴']").click()
+
+        # self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/name'and @text='阿里巴巴']").click()
+
+        # 先定位元素的位置
+        # 在调用WebDriverWait 传入driver 和timeout
+        # 在.unit()调用expected_condition.element_to_xxxx
+        # 识别元素是否可点击，可看见，可用等
+        # 若元素已被找到，在定位元素，将定位位置元素以解包的方式传入
+        locator=(MobileBy.XPATH,"//*[@resource-id='com.xueqiu.android:id/name'and @text='阿里巴巴']")
+        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(locator))
+        self.driver.find_element(*locator).click()
         currey=float(self.driver.find_element_by_id("com.xueqiu.android:id/current_price").text)
         assert currey >200
 
@@ -97,7 +110,8 @@ class Test_app:
         # 先定位股票的价格
         self.driver.find_element_by_id("com.xueqiu.android:id/home_search").click()
         self.driver.find_element_by_id("com.xueqiu.android:id/search_input_text").send_keys('阿里巴巴')
-        self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/name'and @text='阿里巴巴']").click()
+        # self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/name'and @text='阿里巴巴']").click()
+        self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/code'and @text='BABA']").click()
         # 从父元素定位 先定位父元素的位置  在定位子元素位置  /元素[1]
         shares_text=self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/title_container']/android.widget.TextView[2]").text
         print(shares_text)
