@@ -1,0 +1,34 @@
+"""
+1 模拟器下载谷歌安装器
+2.下载对应的 chromdriver
+老版本用broswer 新版本用chrom
+adb如何连接模拟器
+【win版】
+夜神模拟器 adb connect 127.0.0.1:62001
+逍遥模拟器 adb connect 127.0.0.1:21503
+mumu模拟器 adb connect 127.0.0.1:7555
+
+
+
+打印设备/模拟器上的所有软件包
+adb shell pm list package
+
+打印设备/模拟器浏览器的 包名
+adb shell pm list package|findstr browser
+
+打印设备/模拟器上浏览器的版本
+adb shell pm dump com.android.browser |findstr version
+adb shell pm dump com.android.chrome |findstr version
+
+
+检查webview基本环境的命令
+
+adb shell dumpsys package com.android.webview | findstr versionName
+adb shell dumpsys package com.android.chrome | findstr versionName
+adb shell cat /proc/net/unix | findstr webview
+
+"""
+
+
+
+
