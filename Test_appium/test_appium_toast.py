@@ -28,7 +28,7 @@ class Test_toast:
         pass
     def test_toast_case(self):
         self.driver.find_element(MobileBy.ACCESSIBILITY_ID,'Make a Popup!').click()
-        self.driver.find_element_by_xpath("//*[@text='Search']").click()
+        self.driver.find_element_by_xpath("//*[@text='Search1']").click()
         # 打印页面元素
         # print(self.driver.page_source)
         # 定位文字提示框 1 xpath 2. contains(@text='')
