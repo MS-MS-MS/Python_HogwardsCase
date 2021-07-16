@@ -34,7 +34,25 @@ self.driver.find_element_by_android_uiautomator('new UiScrollable(new UiSelector
                                                         'scrollIntoView(new UiSelector().textContains("病人").'
                                                         'instance(0));').click()
 """
+"""
+打印设备/模拟器上的所有软件包
+adb shell pm list package
+原理-设备中安装包的位置
+adb shell
+cd /data/da
+cd /data/data/
+ls
+
+获取所有webview 的进程
+adb shell cat /proc/net/unix | findstr webview
+获取套接字
+adb shell cat /proc/net/unix 
+查看进程所对应的应用
+adb shell ps |findstr 1136(进程号)
 
 
+查看运行APP当前页面的Activity名称
+adb shell dumpsys window | grep mCurrentFocus
+"""
 
 
