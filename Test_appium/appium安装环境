@@ -27,6 +27,12 @@ adb shell dumpsys package com.android.webview | findstr versionName
 adb shell dumpsys package com.android.chrome | findstr versionName
 adb shell cat /proc/net/unix | findstr webview
 
+
+appium 滑动查找
+self.driver.find_element_by_android_uiautomator('new UiScrollable(new UiSelector().'
+                                                        'scrollable(true).instance(0)).'
+                                                        'scrollIntoView(new UiSelector().textContains("病人").'
+                                                        'instance(0));').click()
 """
 
 
