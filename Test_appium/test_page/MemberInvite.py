@@ -13,14 +13,18 @@ from Test_appium.test_page.ContactAddActivity import ContactAddActivity
 """
 添加成员
 """
+
+
 class MemberInvite(BasePage):
-    # def __init__(self,driver):
-    #     self.driver=driver
+    # class MemberInvite:
+    #     def __init__(self,driver):
+    #         self.driver=driver
     def goto_ContactAdd(self):
-        self.driver.find_element(MobileBy.XPATH, "//*[@text='手动输入添加']").click()
-        # return ContactAddActivity(self.driver)
-        return ContactAddActivity()
+        self.find(MobileBy.XPATH, "//*[@text='手动输入添加']").click()
+        return ContactAddActivity(self.driver)
+        # return ContactAddActivity()
 
     def toast(self):
-        result = self.driver.find_element(MobileBy.XPATH, "//*[contains(@text,'添加成功')]").text
-        assert result == "添加成功"
+        result= self.get_toast_text()
+        # result = self.find(MobileBy.XPATH, "//*[contains(@text,'添加成功')]").text
+        return result
