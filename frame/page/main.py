@@ -21,9 +21,11 @@ class Main(BasePage):
         点击登录
         :return:
         """
-        self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/post_status']").click()
-        """
-        点击行情
-        """
-        self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/tab_name'and@text='行情']").click()
+        # self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/post_status']").click()
+        # """
+        # 点击行情
+        # """
+        # self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/tab_name'and@text='行情']").click()
+        # 传入当前方法对应的ymal文件,方法名
+        self.perse_yaml("../datas/main.yaml","goto_market")
         return Market(self.driver)

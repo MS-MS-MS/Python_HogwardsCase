@@ -34,4 +34,3 @@ def Decorator(func):
 
             raise e
     return wrapper
-# /

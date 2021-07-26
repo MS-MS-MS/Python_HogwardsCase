@@ -2,4 +2,3 @@ goto_search:
   - by: xpath
     loactor: '//*[@resource-id="com.xueqiu.android:id/action_search"]'
     action: click
-# /
