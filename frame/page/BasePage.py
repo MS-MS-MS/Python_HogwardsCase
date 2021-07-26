@@ -5,7 +5,10 @@
 @FileName: BasePage.py
 @SoftWare: PyCharm
 """
+import yaml
 from selenium.webdriver.common.by import By
+
+from frame.page.decorator import Decorator
 
 """
 基类 创建driver
@@ -18,7 +21,7 @@ class BasePage:
     """
     黑名单
     """
-    _blacklist = [(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/iv_close']")]
+    blacklist = [(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/iv_close']")]
 
     def __init__(self, driver: WebDriver = None):
         if driver == None:
@@ -34,35 +37,45 @@ class BasePage:
         else:
             # self.driver.launch_app()
             self.driver = driver
+
     """
     定位find方法
     """
+
+    # 加入装饰器 增强find方法，加入黑名单功能
+    @Decorator
     def find(self, by, loactor=None):
+        if loactor == None:
+            result = self.driver.find_element(*by)
+        else:
+            result = self.driver.find_element(by, loactor)
+        return result
+
+    """
+    解析yaml 文件
+    """
+
+    def perse_yaml(self, path, funcname):
         """
-        判断传入的位置是否是元祖
-        进行黑名单的异常捕获 发现界面的元素和黑名单的元素一致，
-        先关闭当前界面,在进行find方法的调用,重新查找该元素
-        :param by:
-        :param loactor:
+        传入ymal文件的路径, 当前方法名 用于从文件中取数据
+        :param path:
+        :param funcname:
         :return:
         """
-        try:
-            """
-            传入元祖进行解包操作
-            """
-            if loactor == None:
-                result = self.driver.find_element(*by)
-            else:
-                result = self.driver.find_element(by, loactor)
-            print(result)
-            return result
-        # 捕捉黑名单的元素
-        except Exception as e:
-            for blacl_ele in self._blacklist:
-                ele = self.driver.find_elements(*blacl_ele)
-                if len(ele) > 0:
-                    ele[0].click()
-                    # 处理玩黑名单再次查找原来的元素
-                    return self.find(by, loactor)
+        with open(path, encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+        #调用perse 传入当前方法的步骤
+        self.perse(data[funcname])
 
-            raise e
+    def perse(self, step):
+        """
+        判断方法的操作，是点击还是输入数据
+        :param step:
+        :return:
+        """
+        for steps in step:
+            print(steps['action'])
+            if 'click' == steps['action']:
+                self.find(steps['by'], steps['loactor']).click()
+            elif 'send_keys' == steps['action']:
+                self.find(steps['by'], steps['loactor']).send_keys(steps['sendkeys'])
