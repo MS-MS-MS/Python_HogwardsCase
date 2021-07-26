@@ -35,11 +35,11 @@ self.driver.find_element_by_android_uiautomator('new UiScrollable(new UiSelector
                                                         'instance(0));').click()
 """
 
-获取当前应用的包名和当前的页面名
-adb shell dumpsys window | findstr mCurrentFocus
-
-
-return 页面跳转
-f string
-f"dddd{text}DDD"
+# 获取当前应用的包名和当前的页面名
+# adb shell dumpsys window | findstr mCurrentFocus
+#
+#
+# return 页面跳转
+# f string
+# f"dddd{text}DDD"
 

@@ -1,0 +1,6 @@
+search_sendkeys:
+  - by: xpath
+    loactor: '//*[@resource-id="com.xueqiu.android:id/search_input_text"]'
+    action: send_keys
+    sendkeys: 'alibaba'
+# /
